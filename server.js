@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 require("dotenv").config();
 const util = require("util");
+const cTable = require("console.table");
 
 // connection object with my configuration
 const connection = mysql.createConnection({
@@ -73,6 +74,34 @@ const menu = () => {
     });
 };
 
+const addDepartment = () => {
+
+}
+
+const addRole = () => {
+
+}
+
+const addEmployee = () => {
+
+}
+
+const viewDepartments = () => {
+
+}
+
+const viewRoles = () => {
+
+}
+
+const viewEmployees = () => {
+
+}
+
+const updateEmployee = () => {
+    
+}
+]
 // I want to know what type of action the user wants to do
 
 // THEN I want to know what the name of the employee
