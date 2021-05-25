@@ -21,8 +21,25 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
   console.log(`connected as id ${connection.threadId}\n`);
-  start();
+  menu();
 });
+
+const menu = () => {
+  inquirer.prompt({
+    name: "mainMenu",
+    type: "list",
+    message: "Main Menu",
+    choices: [
+      "Add department",
+      "Add role",
+      "Add Employee",
+      "View departments",
+      "View roles",
+      "View employees",
+      "Update employee roles",
+    ],
+  });
+};
 
 // I want to know what type of action the user wants to do
 
