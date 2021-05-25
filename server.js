@@ -42,7 +42,7 @@ const menu = () => {
       ],
     })
     .then((answer) => {
-      switch (answer.answer) {
+      switch (answer.option) {
         case "Add department":
           addDepartment();
           break;
@@ -80,11 +80,39 @@ const addRole = () => {};
 
 const addEmployee = () => {};
 
-const viewDepartments = () => {};
+const viewDepartments = () => {
+  const query =
+    "SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id";
+  connection.promise().query(query, (err, res) => {
+    if (err) throw err;
+    console.log("\n");
+    console.table(res);
+    menu();
+  });
+};
 
-const viewRoles = () => {};
+const viewRoles = () => {
+  const query =
+    "SELECT department.id AS id, department.department_name AS department FROM department";
+  connection.promise().query(query, (err, res) => {
+    if (err) throw err;
+    console.log("\n");
+    console.table(res);
+    menu();
+  });
+};
 
-const viewEmployees = () => {};
+const viewEmployees = () => {
+  const query =
+    "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary FROM employee, role, department WHERE department.id = role.department_id AND role.id = employee.role_id ORDERBY employee.id ASC";
+
+  connection.promise().query(query, (err, res) => {
+    if (err) throw err;
+    console.log("\n");
+    console.table(res);
+    menu();
+  });
+};
 
 const updateEmployee = () => {};
 
