@@ -74,34 +74,20 @@ const menu = () => {
     });
 };
 
-const addDepartment = () => {
+const addDepartment = () => {};
 
-}
+const addRole = () => {};
 
-const addRole = () => {
+const addEmployee = () => {};
 
-}
+const viewDepartments = () => {};
 
-const addEmployee = () => {
+const viewRoles = () => {};
 
-}
+const viewEmployees = () => {};
 
-const viewDepartments = () => {
+const updateEmployee = () => {};
 
-}
-
-const viewRoles = () => {
-
-}
-
-const viewEmployees = () => {
-
-}
-
-const updateEmployee = () => {
-    
-}
-]
 // I want to know what type of action the user wants to do
 
 // THEN I want to know what the name of the employee
