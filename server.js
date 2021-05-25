@@ -25,20 +25,52 @@ connection.connect((err) => {
 });
 
 const menu = () => {
-  inquirer.prompt({
-    name: "mainMenu",
-    type: "list",
-    message: "Main Menu",
-    choices: [
-      "Add department",
-      "Add role",
-      "Add Employee",
-      "View departments",
-      "View roles",
-      "View employees",
-      "Update employee roles",
-    ],
-  });
+  inquirer
+    .prompt({
+      name: "mainMenu",
+      type: "list",
+      message: "Main Menu",
+      choices: [
+        "Add department",
+        "Add role",
+        "Add employee",
+        "View departments",
+        "View roles",
+        "View employees",
+        "Update employee roles",
+      ],
+    })
+    .then((answer) => {
+      switch (answer.answer) {
+        case "Add department":
+          addDepartment();
+          break;
+
+        case "Add role":
+          addRole();
+          break;
+
+        case "Add employee":
+          addEmployee();
+          break;
+
+        case "View departments":
+          viewDepartments();
+          break;
+
+        case "View roles":
+          viewRoles();
+          break;
+
+        case "View employees":
+          viewEmployees();
+          break;
+
+        case "Update employee roles":
+          updateEmployee();
+          break;
+      }
+    });
 };
 
 // I want to know what type of action the user wants to do
