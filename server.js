@@ -1,13 +1,37 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const router = require("express").Router();
+require("dotenv").config();
+const util = require("util");
 
-const app = express();
-const PORT = process.env.PORT || 3306;
+// connection object with my configuration
+const connection = mysql.createConnection({
+  host: "localhost",
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+  // Your port; if not 3306
+  port: 3306,
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening"));
+  // Your username
+  user: process.env.DB_USER,
+
+  password: process.env.DB_PASS,
+  database: "employees_db",
 });
+
+// Connect to the DB
+connection.connect((err) => {
+  if (err) throw err;
+  console.log(`connected as id ${connection.threadId}\n`);
+  start();
+});
+
+// I want to know what type of action the user wants to do
+
+// THEN I want to know what the name of the employee
+
+// I want to be able to add departments, roles, employees
+
+// I want to be able to view departments, roles, employees
+
+// I want to be able to update employee roles
+
+// Use inquirer list with choices as the mapped roles
