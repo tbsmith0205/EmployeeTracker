@@ -51,10 +51,6 @@ const menu = () => {
           addRole();
           break;
 
-        case "Add employee":
-          addEmployee();
-          break;
-
         case "View departments":
           viewDepartments();
           break;
@@ -65,10 +61,6 @@ const menu = () => {
 
         case "View employees":
           viewEmployees();
-          break;
-
-        case "Update employee roles":
-          updateEmployee();
           break;
       }
     });
@@ -109,20 +101,21 @@ const addRole = () => {
       )
       .then((answer) => {
         const query = "INSERT INTO role SET ? ";
-        connection.query(query, {
+        connection.query(
+          query,
+          {
             title: answer.newRole,
             salary: answer.salary,
-        }
-        .then((err) => {
+          },
+          function (err) {
             if (err) throw err;
             console.table(answer);
-            menu();
-        })
+            mainMenu();
+          }
+        );
       });
   });
 };
-
-const addEmployee = () => {};
 
 const viewDepartments = () => {
   const query =
@@ -157,17 +150,3 @@ const viewEmployees = () => {
     menu();
   });
 };
-
-const updateEmployee = () => {};
-
-// I want to know what type of action the user wants to do
-
-// THEN I want to know what the name of the employee
-
-// I want to be able to add departments, roles, employees
-
-// I want to be able to view departments, roles, employees
-
-// I want to be able to update employee roles
-
-// Use inquirer list with choices as the mapped roles
