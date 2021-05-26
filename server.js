@@ -91,7 +91,36 @@ const addDepartment = () => {
     });
 };
 
-const addRole = () => {};
+const addRole = () => {
+  const query = "SELECT role.title AS Title, role.salary AS Salary FROM role";
+  connection.query(query, (err, res) => {
+    inquirer
+      .prompt(
+        {
+          name: "newRole",
+          type: "input",
+          message: "What is the name of this new role?",
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "What is the salary for this role?",
+        }
+      )
+      .then((answer) => {
+        const query = "INSERT INTO role SET ? ";
+        connection.query(query, {
+            title: answer.newRole,
+            salary: answer.salary,
+        }
+        .then((err) => {
+            if (err) throw err;
+            console.table(answer);
+            menu();
+        })
+      });
+  });
+};
 
 const addEmployee = () => {};
 
@@ -101,7 +130,7 @@ const viewDepartments = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.log(res);
+    console.table(res);
     menu();
   });
 };
@@ -112,7 +141,7 @@ const viewRoles = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.log(res);
+    console.table(res);
     menu();
   });
 };
@@ -124,7 +153,7 @@ const viewEmployees = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.log(res);
+    console.table(res);
     menu();
   });
 };
