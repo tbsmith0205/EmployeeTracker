@@ -42,7 +42,7 @@ const menu = () => {
       ],
     })
     .then((answer) => {
-      switch (answer.option) {
+      switch (answer.mainMenu) {
         case "Add department":
           addDepartment();
           break;
@@ -74,7 +74,22 @@ const menu = () => {
     });
 };
 
-const addDepartment = () => {};
+const addDepartment = () => {
+  inquirer
+    .prompt({
+      name: "departmentName",
+      type: "input",
+      message: "What department are you adding?",
+    })
+    .then((answer) => {
+      const query = "INSERT INTO department SET ? ";
+
+      connection.query(query, answer.departmentName, (err, res) => {
+        if (err) throw err;
+        console.log(answer.departmentName + "department has been created.");
+      });
+    });
+};
 
 const addRole = () => {};
 
@@ -86,7 +101,7 @@ const viewDepartments = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.table(res);
+    console.log(res);
     menu();
   });
 };
@@ -97,7 +112,7 @@ const viewRoles = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.table(res);
+    console.log(res);
     menu();
   });
 };
@@ -109,7 +124,7 @@ const viewEmployees = () => {
   connection.promise().query(query, (err, res) => {
     if (err) throw err;
     console.log("\n");
-    console.table(res);
+    console.log(res);
     menu();
   });
 };
